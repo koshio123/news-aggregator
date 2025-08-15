@@ -2,7 +2,7 @@
 
 NOTE: The screenshot was generated using [Vercel v0](https://vercel.com/docs/v0) and it's not the final version.
 
-![alt text](image.png)
+![alt text](docs/images/image.png)
 
 **News Aggregator** is a personal Agentic AI-powered app that automatically collects news articles from multiple sources, scores them based on relevance to your interests, and generates summaries for quick reading. This project is designed for **personal use**, using **AWS serverless architecture** to minimize cost.
 
