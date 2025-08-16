@@ -62,7 +62,7 @@ class ScoredNews(News):
 
 class ScoredNewsList(NewsList):
     """A list of news articles with relevance score"""
-    articles: list[ScoredNews]
+    articles: list[ScoredNews] # type: ignore
 
 
 class UserInfo(BaseModel):

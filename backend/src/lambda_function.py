@@ -1,16 +1,12 @@
 import os
-from datetime import datetime
-from urllib.request import Request, urlopen
 import json
 import asyncio
 
-from agents.agent import Agent
-from agents.model_settings import ModelSettings
 from agents.run import Runner
 from agents.tracing.create import trace
-from models import News, NewsList, NewsSummary, RelevanceScore, UserInfo
-from tools import fetch_news
+from models import News, NewsList, NewsSummary, UserInfo
 from custom_agents import news_retriever_agent, news_scorer_agent, news_summarizer_agent
+from utils import SESClient
 
 
 async def async_handler(event, context):
@@ -25,11 +21,11 @@ async def async_handler(event, context):
     )
 
     relevant_articles: list[News] = []
-    summaries = []
+    summaries: list[NewsSummary] = []
     with trace("News Retriever"):
         print(f"Running news retriever agent with user info: {user_info.model_dump_json()}")
         result = await Runner.run(news_retriever_agent, user_info.model_dump_json())
-        articles: NewsList = result.final_output.articles
+        articles: list[News] = result.final_output.articles
         print(f"Retrieved {len(articles)} articles.")
         for article in articles:
             print(f"Article: {article.model_dump_json()}")
